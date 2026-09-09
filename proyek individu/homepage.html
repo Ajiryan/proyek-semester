@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Platform Donasi - Berbagi Kebaikkan</title>
+</head>
+<body>
+
+  <!-- 1. HEADER & NAVIGASI -->
+  <header>
+    <h1>Platform Donasi Bencana & Peduli Sesama</h1>
+    <nav aria-label="Navigasi Utama">
+      <ul>
+        <li><a href="#berita">1. Berita Lapangan</a></li>
+        <li><a href="#panduan">2. Cara Berdonasi</a></li>
+        <li><a href="#auth">3. Login / Registrasi</a></li>
+        <li><a href="#form-donasi">4. Ingin Berdonasi</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- SECTION 1: Berita Lapangan (Termasuk Tag Article) -->
+    <section id="berita" aria-labelledby="heading-berita">
+      <h2 id="heading-berita">Berita Lapangan Terkini</h2>
+      <article>
+        <h3>Update Kondisi Posko Bencana</h3>
+        <img src="posko.jpg" alt="Aktivitas penyaluran bantuan barang di posko bencana">
+        <p>Proses verifikasi dan penerimaan barang donasi di lokasi posko berjalan dengan lancar. Tim relawan terus melakukan pemeriksaan fisik barang yang masuk dari para donatur.</p>
+        <a href="#berita-detail" title="Baca selengkapnya mengenai update berita lapangan">Baca artikel selengkapnya</a>
+      </article>
+    </section>
+
+    <!-- SECTION 2: Panduan Berdonasi -->
+    <section id="panduan" aria-labelledby="heading-panduan">
+      <h2 id="heading-panduan">Panduan & Cara Berdonasi</h2>
+      <p>Ikuti langkah-langkah mudah berikut untuk menyalurkan barang donasi Anda:</p>
+      <ol>
+        <li>Masuk ke akun Anda atau daftar jika belum memiliki akun.</li>
+        <li>Isi form pengajuan donasi dengan menyertakan detail barang dan kategori.</li>
+        <li>Pilih posko tujuan terdekat.</li>
+        <li>Tunggu verifikasi persetujuan dari admin.</li>
+        <li>Kirimkan barang ke posko setelah menerima notifikasi persetujuan.</li>
+      </ol>
+    </section>
+
+    <!-- SECTION 3: Autentikasi (Login / Register) -->
+    <section id="auth" aria-labelledby="heading-auth">
+      <h2 id="heading-auth">Akun Donatur (Login / Registrasi)</h2>
+      
+      <!-- Login OAuth -->
+      <div>
+        <h3>Masuk Cepat (OAuth)</h3>
+        <button type="button">Login via Google</button>
+        <button type="button">Login via Facebook</button>
+      </div>
+
+      <hr>
+
+      <!-- Form Manual -->
+      <div>
+        <h3>Masuk / Daftar Manual</h3>
+        <form action="/login" method="POST">
+          <div>
+            <label for="email">Email atau Username:</label>
+            <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+          </div>
+          <div>
+            <label for="password">Kata Sandi:</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <button type="submit">Masuk</button>
+          <button type="button">Daftar Akun Baru</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FORM KONTAK / MASUKAN / PENGAJUAN DONASI MULTI-STEP -->
+    <section id="form-donasi" aria-labelledby="heading-donasi">
+      <h2 id="heading-donasi">Form Pengajuan Donasi Barang</h2>
+      <form action="/submit-donasi" method="POST">
+        
+        <!-- Langkah 1 -->
+        <fieldset>
+          <legend>Langkah 1: Data Diri &amp; Kategori Barang</legend>
+          <div>
+            <label for="nama-donatur">Nama Lengkap:</label>
+            <input type="text" id="nama-donatur" name="nama" required placeholder="Nama lengkap Anda">
+          </div>
+          <div>
+            <label for="kategori-barang">Kategori Barang:</label>
+            <select id="kategori-barang" name="kategori" required>
+              <option value="">-- Pilih Kategori --</option>
+              <option value="pakaian">Pakaian / Tekstil</option>
+              <option value="logistik">Sembako / Makanan</option>
+              <option value="obat">Obat-obatan / Medis</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Langkah 2 -->
+        <fieldset>
+          <legend>Langkah 2: Detail Barang &amp; Posko Tujuan</legend>
+          <div>
+            <label for="posko-tujuan">Pilih Posko Tujuan:</label>
+            <select id="posko-tujuan" name="posko" required>
+              <option value="">-- Pilih Posko --</option>
+              <option value="posko-1">Posko Utama Wilayah A</option>
+              <option value="posko-2">Posko Darurat Wilayah B</option>
+            </select>
+          </div>
+          <div>
+            <label for="detail-barang">Detail Barang &amp; Jumlah:</label>
+            <textarea id="detail-barang" name="detail" rows="4" placeholder="Jelaskan kondisi dan jumlah barang..." required></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit">Kirim Pengajuan Donasi</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Platform Donasi Bencana. Seluruh hak cipta dilindungi.</p>
+  </footer>
+
+</body>
+</html>
