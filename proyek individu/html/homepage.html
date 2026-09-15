@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Platform Donasi Bencana & Peduli Sesama - Salurkan bantuan sembako, pakaian layak, dan obat-obatan secara transparan, aman, dan tepat sasaran.">
+  <meta name="theme-color" content="#2563eb">
+  <title>Sistem Platform Donasi - Berbagi Kebaikkan & Peduli Sesama</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Aksesibilitas: Skip link untuk pengguna keyboard / screen reader -->
+  <a href="#main-content" class="c-skip-link">Lewati ke konten utama</a>
+
+  <!-- 1. HEADER & NAVIGASI -->
+  <header class="site-header">
+    <div class="l-container site-header__inner">
+      <a href="#beranda" class="site-logo" aria-label="Beranda Platform Donasi Peduli Sesama">
+        <span class="site-logo__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </span>
+        <span class="site-logo__text">Peduli<span>Sesama</span></span>
+      </a>
+
+      <nav aria-label="Navigasi Utama" class="site-nav">
+        <ul class="site-nav__list">
+          <li><a href="#berita" class="site-nav__link">1. Berita Lapangan</a></li>
+          <li><a href="#panduan" class="site-nav__link">2. Cara Berdonasi</a></li>
+          <li><a href="#auth" class="site-nav__link">3. Login / Registrasi</a></li>
+          <li><a href="#form-donasi" class="c-btn c-btn--primary c-btn--sm">4. Ingin Berdonasi</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: Pengantar Landing Page Donasi -->
+  <section id="beranda" class="hero-section" aria-labelledby="hero-heading">
+    <div class="l-container hero-section__inner">
+      <div class="hero-section__content">
+        <div class="c-badge c-badge--soft-blue hero-section__badge">
+          <span class="c-badge__dot" aria-hidden="true"></span>
+          Siaga Tanggap Bencana 24/7
+        </div>
+        <h1 id="hero-heading" class="hero-section__title">
+          Platform Donasi Bencana &amp; Peduli Sesama
+        </h1>
+        <p class="hero-section__description">
+          Salurkan kebaikan Anda secara nyata. Kami memfasilitasi penerimaan dan distribusi bantuan logistik, pakaian layak pakai, serta obat-obatan untuk posko tanggap darurat dengan verifikasi transparan dan amanah.
+        </p>
+        <div class="hero-section__actions">
+          <a href="#form-donasi" class="c-btn c-btn--primary c-btn--lg">Salurkan Donasi Sekarang</a>
+          <a href="#panduan" class="c-btn c-btn--secondary c-btn--lg">Pelajari Alur Donasi</a>
+        </div>
+      </div>
+
+      <!-- Quick Impact Stats -->
+      <div class="hero-stats" role="region" aria-label="Statistik Penyaluran Donasi">
+        <div class="c-card c-card--stat">
+          <div class="hero-stats__number">15+</div>
+          <div class="hero-stats__label">Posko Siaga Aktif</div>
+        </div>
+        <div class="c-card c-card--stat">
+          <div class="hero-stats__number">12.850+</div>
+          <div class="hero-stats__label">Paket Bantuan Terverifikasi</div>
+        </div>
+        <div class="c-card c-card--stat">
+          <div class="hero-stats__number">100%</div>
+          <div class="hero-stats__label">Distribusi Transparan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
+    <!-- SECTION 1: Berita Lapangan (Termasuk Tag Article & Reusable Component Card) -->
+    <section id="berita" class="section section--news" aria-labelledby="heading-berita">
+      <div class="l-container">
+        <div class="section-header">
+          <span class="c-badge c-badge--soft-blue">Informasi Posko</span>
+          <h2 id="heading-berita" class="section-header__title">Berita Lapangan Terkini</h2>
+          <p class="section-header__subtitle">Laporan langsung dari para relawan mengenai kondisi posko dan distribusi bantuan donasi di lapangan.</p>
+        </div>
+
+        <div class="news-grid">
+          <!-- Article Utama (Sesuai Struktur Asli) -->
+          <article class="c-card c-card--interactive">
+            <div class="c-card__media">
+              <img src="posko.jpg" alt="Aktivitas penyaluran bantuan barang di posko bencana" loading="lazy">
+              <span class="c-badge c-badge--primary c-card__floating-badge">Distribusi Bantuan</span>
+            </div>
+            <div class="c-card__body">
+              <div class="c-card__meta">
+                <span class="meta-tag">Posko Utama Wilayah A</span>
+                <span class="meta-separator" aria-hidden="true">&bull;</span>
+                <time datetime="2026-09-14">14 September 2026</time>
+              </div>
+              <h3 class="c-card__title">Update Kondisi Posko Bencana</h3>
+              <p class="c-card__text">Proses verifikasi dan penerimaan barang donasi di lokasi posko berjalan dengan lancar. Tim relawan terus melakukan pemeriksaan fisik barang yang masuk dari para donatur.</p>
+              <div class="c-card__footer">
+                <a href="#berita-detail" class="c-btn c-btn--outline c-btn--sm" title="Baca selengkapnya mengenai update berita lapangan">
+                  Baca artikel selengkapnya
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Pendukung 1 -->
+          <article class="c-card c-card--interactive">
+            <div class="c-card__media">
+              <div class="c-card__placeholder-media" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                  <path d="m3.3 7 8.7 5 8.7-5"/>
+                  <path d="M12 22V12"/>
+                </svg>
+              </div>
+              <span class="c-badge c-badge--warning c-card__floating-badge">Kebutuhan Mendesak</span>
+            </div>
+            <div class="c-card__body">
+              <div class="c-card__meta">
+                <span class="meta-tag">Posko Darurat Wilayah B</span>
+                <span class="meta-separator" aria-hidden="true">&bull;</span>
+                <time datetime="2026-09-13">13 September 2026</time>
+              </div>
+              <h3 class="c-card__title">Kebutuhan Sembako &amp; Selimut Hangat</h3>
+              <p class="c-card__text">Menghadapi cuaca ekstrem di lokasi pengungsian, dibutuhkan tambahan selimut tebal, popok bayi, dan paket makanan siap santap higienis.</p>
+              <div class="c-card__footer">
+                <a href="#berita-detail" class="c-btn c-btn--outline c-btn--sm" title="Baca rincian kebutuhan sembako">
+                  Baca artikel selengkapnya
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Pendukung 2 -->
+          <article class="c-card c-card--interactive">
+            <div class="c-card__media">
+              <div class="c-card__placeholder-media c-card__placeholder-media--teal" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/>
+                </svg>
+              </div>
+              <span class="c-badge c-badge--success c-card__floating-badge">Layanan Medis</span>
+            </div>
+            <div class="c-card__body">
+              <div class="c-card__meta">
+                <span class="meta-tag">Tim Medis Relawan</span>
+                <span class="meta-separator" aria-hidden="true">&bull;</span>
+                <time datetime="2026-09-12">12 September 2026</time>
+              </div>
+              <h3 class="c-card__title">Distribusi Paket Obat &amp; Vitamin</h3>
+              <p class="c-card__text">Penyaluran obat-obatan darurat serta pemeriksaan kesehatan berkala bagi lansia dan anak-anak telah menjangkau lebih dari 450 keluarga penerima manfaat.</p>
+              <div class="c-card__footer">
+                <a href="#berita-detail" class="c-btn c-btn--outline c-btn--sm" title="Baca rincian layanan medis">
+                  Baca artikel selengkapnya
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Panduan Berdonasi (Alur 5 Langkah Terstruktur) -->
+    <section id="panduan" class="section section--guide" aria-labelledby="heading-panduan">
+      <div class="l-container">
+        <div class="section-header">
+          <span class="c-badge c-badge--soft-blue">Alur Praktis</span>
+          <h2 id="heading-panduan" class="section-header__title">Panduan &amp; Cara Berdonasi</h2>
+          <p class="section-header__subtitle">Ikuti langkah-langkah mudah berikut untuk menyalurkan barang donasi Anda:</p>
+        </div>
+
+        <ol class="guide-steps" role="list">
+          <li class="c-card c-card--step">
+            <div class="c-card__step-number" aria-hidden="true">01</div>
+            <h3 class="c-card__step-title">Daftar / Masuk Akun</h3>
+            <p class="c-card__step-desc">Masuk ke akun Anda atau daftar jika belum memiliki akun untuk memantau status penyaluran bantuan.</p>
+          </li>
+          <li class="c-card c-card--step">
+            <div class="c-card__step-number" aria-hidden="true">02</div>
+            <h3 class="c-card__step-title">Isi Form Pengajuan</h3>
+            <p class="c-card__step-desc">Isi form pengajuan donasi dengan menyertakan detail barang dan kategori yang hendak disumbangkan.</p>
+          </li>
+          <li class="c-card c-card--step">
+            <div class="c-card__step-number" aria-hidden="true">03</div>
+            <h3 class="c-card__step-title">Pilih Posko Tujuan</h3>
+            <p class="c-card__step-desc">Pilih posko tujuan terdekat atau posko dengan tingkat urgensi tertinggi sesuai lokasi Anda.</p>
+          </li>
+          <li class="c-card c-card--step">
+            <div class="c-card__step-number" aria-hidden="true">04</div>
+            <h3 class="c-card__step-title">Verifikasi Admin</h3>
+            <p class="c-card__step-desc">Tunggu verifikasi persetujuan dari admin lapangan demi memastikan kesesuaian kebutuhan posko.</p>
+          </li>
+          <li class="c-card c-card--step">
+            <div class="c-card__step-number" aria-hidden="true">05</div>
+            <h3 class="c-card__step-title">Kirimkan Barang</h3>
+            <p class="c-card__step-desc">Kirimkan barang ke posko setelah menerima notifikasi persetujuan resmi beserta kode bukti serah terima.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Autentikasi (Login / Register) -->
+    <section id="auth" class="section section--auth" aria-labelledby="heading-auth">
+      <div class="l-container">
+        <div class="auth-card-wrapper">
+          <div class="c-card c-card--auth">
+            <div class="section-header">
+              <span class="c-badge c-badge--soft-blue">Akses Donatur</span>
+              <h2 id="heading-auth" class="section-header__title">Akun Donatur (Login / Registrasi)</h2>
+              <p class="section-header__subtitle">Kelola riwayat donasi dan dapatkan transparansi laporan secara berkala.</p>
+            </div>
+
+            <!-- Login OAuth -->
+            <div class="auth-oauth">
+              <h3 class="auth-subtitle">Masuk Cepat (OAuth)</h3>
+              <div class="auth-oauth__buttons">
+                <button type="button" class="c-btn c-btn--social-google">
+                  <svg class="c-btn__icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/>
+                    <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/>
+                    <path fill="#FBBC05" d="M5.6 14.8c-.3-.8-.4-1.8-.4-2.8 0-1 .1-2 .4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/>
+                    <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"/>
+                  </svg>
+                  Login via Google
+                </button>
+                <button type="button" class="c-btn c-btn--social-facebook">
+                  <svg class="c-btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  Login via Facebook
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-divider" role="separator">
+              <span>atau masuk secara manual</span>
+            </div>
+
+            <!-- Form Manual -->
+            <div class="auth-manual">
+              <h3 class="auth-subtitle">Masuk / Daftar Manual</h3>
+              <form action="/login" method="POST" class="c-form">
+                <div class="c-form-group">
+                  <label for="email" class="c-form-label">Email atau Username: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <input type="email" id="email" name="email" class="c-input" required placeholder="contoh@email.com" autocomplete="email">
+                </div>
+                <div class="c-form-group">
+                  <label for="password" class="c-form-label">Kata Sandi: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <input type="password" id="password" name="password" class="c-input" required placeholder="Masukkan kata sandi Anda" autocomplete="current-password">
+                </div>
+                <div class="auth-form-actions">
+                  <button type="submit" class="c-btn c-btn--primary">Masuk</button>
+                  <button type="button" class="c-btn c-btn--secondary">Daftar Akun Baru</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FORM PENGAJUAN DONASI MULTI-STEP -->
+    <section id="form-donasi" class="section section--donation-form" aria-labelledby="heading-donasi">
+      <div class="l-container">
+        <div class="section-header">
+          <span class="c-badge c-badge--soft-blue">Aksi Nyata</span>
+          <h2 id="heading-donasi" class="section-header__title">Form Pengajuan Donasi Barang</h2>
+          <p class="section-header__subtitle">Lengkapi formulir di bawah ini dengan data yang valid agar relawan kami dapat memverifikasi barang bantuan Anda dengan cepat.</p>
+        </div>
+
+        <div class="donation-form-wrapper">
+          <form action="/submit-donasi" method="POST" class="c-card c-card--form c-form">
+
+            <!-- Langkah 1 -->
+            <fieldset class="form-step">
+              <legend class="form-step__legend">
+                <span class="form-step__badge" aria-hidden="true">1</span>
+                <span>Langkah 1: Data Diri &amp; Kategori Barang</span>
+              </legend>
+              <div class="form-step__grid">
+                <div class="c-form-group">
+                  <label for="nama-donatur" class="c-form-label">Nama Lengkap: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <input type="text" id="nama-donatur" name="nama" class="c-input" required placeholder="Contoh: Budi Santoso" autocomplete="name">
+                </div>
+                <div class="c-form-group">
+                  <label for="kategori-barang" class="c-form-label">Kategori Barang: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <select id="kategori-barang" name="kategori" class="c-select" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="pakaian">Pakaian / Tekstil Layak Pakai</option>
+                    <option value="logistik">Sembako / Makanan Higienis</option>
+                    <option value="obat">Obat-obatan / Medis Darurat</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Langkah 2 -->
+            <fieldset class="form-step">
+              <legend class="form-step__legend">
+                <span class="form-step__badge" aria-hidden="true">2</span>
+                <span>Langkah 2: Detail Barang &amp; Posko Tujuan</span>
+              </legend>
+              <div class="form-step__grid">
+                <div class="c-form-group c-form-group--full">
+                  <label for="posko-tujuan" class="c-form-label">Pilih Posko Tujuan: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <select id="posko-tujuan" name="posko" class="c-select" required>
+                    <option value="">-- Pilih Posko --</option>
+                    <option value="posko-1">Posko Utama Wilayah A (Siaga Banjir)</option>
+                    <option value="posko-2">Posko Darurat Wilayah B (Tanggap Longsor)</option>
+                  </select>
+                </div>
+                <div class="c-form-group c-form-group--full">
+                  <label for="detail-barang" class="c-form-label">Detail Barang &amp; Jumlah: <span class="c-form-label__required" aria-hidden="true">*</span></label>
+                  <textarea id="detail-barang" name="detail" class="c-textarea" rows="4" placeholder="Jelaskan jenis, kondisi kelayakan, dan perkiraan jumlah kardus atau volume barang..." required></textarea>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-submit-wrapper">
+              <button type="submit" class="c-btn c-btn--primary c-btn--lg c-btn--full">
+                Kirim Pengajuan Donasi
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="l-container site-footer__inner">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <div class="site-logo">
+            <span class="site-logo__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+            </span>
+            <span class="site-logo__text">Peduli<span>Sesama</span></span>
+          </div>
+          <p class="site-footer__desc">
+            Wadah kolaborasi gotong royong terpercaya untuk menyalurkan barang bantuan bencana secara transparan, akuntabel, dan bermartabat.
+          </p>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__title">Tautan Cepat</h4>
+          <ul class="site-footer__links">
+            <li><a href="#berita">Berita Posko</a></li>
+            <li><a href="#panduan">Alur Berdonasi</a></li>
+            <li><a href="#auth">Masuk Donatur</a></li>
+            <li><a href="#form-donasi">Ajukan Bantuan</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__title">Kontak &amp; Posko Siaga</h4>
+          <ul class="site-footer__links">
+            <li><span>Hotline Bencana: 1500-112</span></li>
+            <li><span>WhatsApp Posko: +62 812-3456-7890</span></li>
+            <li><span>Email: poskosembilan@pedulisesama.id</span></li>
+            <li><span>Alamat: Posko Induk Kemanusiaan, Indonesia</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>&copy; 2026 Platform Donasi Bencana &amp; Peduli Sesama. Seluruh hak cipta dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
