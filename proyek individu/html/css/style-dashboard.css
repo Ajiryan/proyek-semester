@@ -15,6 +15,9 @@
   --color-facebook: #1877f2;
   --color-facebook-hover: #1d4ed8;
 
+  --color-danger: #dc2626;           /* Red for Error Status */
+  --color-danger-light: #fef2f2;
+
   /* Neutral Surface & Text */
   --color-bg: #f8fafc; 
   --color-surface: #ffffff;
@@ -359,8 +362,14 @@ button:hover, .btn:hover {
   color: #b45309;
 }
 
-/* Forms */
-input[type="text"], input[type="email"], input[type="password"], select, textarea {
+/* Forms Input Styling */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="date"], 
+select, 
+textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   font-family: var(--font-sans);
@@ -369,7 +378,7 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 input:focus, select:focus, textarea:focus {
@@ -387,6 +396,11 @@ fieldset {
   flex-direction: column;
   gap: var(--space-md);
   margin-bottom: 1rem;
+}
+
+fieldset > div {
+  display: flex;
+  flex-direction: column;
 }
 
 legend {
@@ -444,11 +458,7 @@ footer {
   }
 }
 
-/* ==========================================
-   MODAL / OVERLAY LOGIN MENGAMBANG
-   ========================================== */
-
-/* Dark Overlay Background */
+/* MODAL / OVERLAY LOGIN MENGAMBANG */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -461,25 +471,21 @@ footer {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  
-  /* Hidden default */
   opacity: 0;
   visibility: hidden;
   transition: opacity 250ms ease, visibility 250ms ease;
 }
 
-/* Tampilan saat modal dipanggil */
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-/* Kartu Login Mengambang */
 .modal-card {
   position: relative;
   width: 90%;
   max-width: 420px;
-  background-color: #fffde7; /* Latar krem lembut */
+  background-color: #fffde7;
   border-radius: var(--radius-lg);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   padding: 2.5rem 2rem;
@@ -500,7 +506,6 @@ footer {
   text-align: center;
 }
 
-/* Form Group inside Modal */
 .modal-card .modal-form-group {
   margin-bottom: 1rem;
 }
@@ -534,7 +539,6 @@ footer {
   font-weight: normal;
 }
 
-/* Tombol Login Biru */
 .btn-login-submit {
   width: 100%;
   background-color: #007bff;
@@ -553,7 +557,6 @@ footer {
   transform: none;
 }
 
-/* Link di Bawah Modal */
 .modal-footer-links {
   margin-top: 1.25rem;
   text-align: center;
@@ -569,7 +572,6 @@ footer {
   text-decoration: underline;
 }
 
-/* Tombol Close (X) */  
 .modal-close-btn {
   position: absolute;
   top: 0.75rem;
@@ -587,4 +589,69 @@ footer {
   color: #0f172a;
   background: transparent;
   transform: none;
+}
+
+/* ==========================================
+   STYLE DENGAN DUKUNGAN VALIDASI & ARIA
+   ========================================== */
+
+/* Error Summary Box */
+.error-summary-box {
+  background-color: var(--color-danger-light);
+  border: 2px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-summary-box h3 {
+  color: #991b1b;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.error-summary-box ul {
+  padding-left: 1.25rem;
+}
+
+.error-summary-box li a {
+  color: var(--color-danger);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.error-summary-box li a:hover,
+.error-summary-box li a:focus {
+  color: #991b1b;
+}
+
+/* Tanda Wajib Isi (*) */
+.required-asterisk {
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+/* Pesan Error di Bawah Input */
+.field-error {
+  display: block;
+  color: var(--color-danger);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  margin-top: 0.25rem;
+  min-height: 1.15rem;
+}
+
+/* Status Border Merah Saat Field Invalid */
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-danger) !important;
+  background-color: #fff5f5;
+}
+
+input[aria-invalid="true"]:focus,
+select[aria-invalid="true"]:focus,
+textarea[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
 }
