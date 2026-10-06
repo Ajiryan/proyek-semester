@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  // 1. Pemicu Modal: Klik Menu Header "Login / Registrasi"
   if (btnOpenLogin) {
     btnOpenLogin.addEventListener('click', (e) => {
       e.preventDefault();
@@ -51,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Pemicu Modal: Klik Menu Header "Ingin Berdonasi" (Jika belum login)
   if (btnOpenDonasi) {
     btnOpenDonasi.addEventListener('click', (e) => {
       if (!isLoggedIn) {
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Kontrol Tutup Modal (Klik X, area overlay luar, atau tombol ESC)
   if (btnCloseModal) {
     btnCloseModal.addEventListener('click', closeLoginModal);
   }
@@ -78,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4. Simulasi Submit Form Login Modal
   if (loginFormModal) {
     loginFormModal.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -217,14 +213,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // FITUR 3: AUTOSAVE DRAFT FORM DONASI + WEB STORAGE
+  // FITUR 3: AUTOSAVE DRAFT & VALIDASI FORM AKSESIBEL
   // ==========================================
   const formDonasi = document.querySelector('#donasi-form');
   const inputNama = document.querySelector('#nama-donatur');
+  const inputEmail = document.querySelector('#email-donatur');
   const selectKategori = document.querySelector('#kategori-barang');
+  const inputJumlah = document.querySelector('#jumlah-unit');
   const selectPosko = document.querySelector('#posko-tujuan');
+  const inputTanggal = document.querySelector('#tanggal-pengiriman');
   const textareaDetail = document.querySelector('#detail-barang');
+  const checkKelayakan = document.querySelector('#check-kelayakan');
   const statusDraftEl = document.querySelector('#draft-status');
+
+  const errorSummary = document.querySelector('#errorSummary');
+  const errorList = document.querySelector('#errorList');
 
   const STORAGE_KEY_DRAFT = 'donasi_form_draft';
 
@@ -234,9 +237,13 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const draft = JSON.parse(rawDraft);
         if (draft.nama) inputNama.value = draft.nama;
+        if (draft.email && inputEmail) inputEmail.value = draft.email;
         if (draft.kategori) selectKategori.value = draft.kategori;
+        if (draft.jumlah && inputJumlah) inputJumlah.value = draft.jumlah;
         if (draft.posko) selectPosko.value = draft.posko;
+        if (draft.tanggal && inputTanggal) inputTanggal.value = draft.tanggal;
         if (draft.detail) textareaDetail.value = draft.detail;
+        if (draft.kelayakan && checkKelayakan) checkKelayakan.checked = draft.kelayakan;
         statusDraftEl.textContent = '✨ Draft formulir sebelumnya berhasil dipulihkan!';
       } catch (err) {
         console.error('Gagal membaca draft:', err);
@@ -247,9 +254,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveFormDraft() {
     const draftData = {
       nama: inputNama.value,
+      email: inputEmail ? inputEmail.value : '',
       kategori: selectKategori.value,
+      jumlah: inputJumlah ? inputJumlah.value : '',
       posko: selectPosko.value,
-      detail: textareaDetail.value
+      tanggal: inputTanggal ? inputTanggal.value : '',
+      detail: textareaDetail.value,
+      kelayakan: checkKelayakan ? checkKelayakan.checked : false
     };
     localStorage.setItem(STORAGE_KEY_DRAFT, JSON.stringify(draftData));
     statusDraftEl.textContent = 'Draft tersimpan otomatis di browser...';
@@ -257,21 +268,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formDonasi.addEventListener('input', saveFormDraft);
 
-  // Pemicu Modal: Saat Form Donasi di-submit namun user belum login
+  // Fungsi Pembantu Validasi Form & Aksesibilitas
+  function resetFormErrors() {
+    errorSummary.style.display = 'none';
+    errorList.innerHTML = '';
+    const errorSpans = formDonasi.querySelectorAll('.field-error');
+    errorSpans.forEach(span => span.textContent = '');
+    const inputs = formDonasi.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => input.removeAttribute('aria-invalid'));
+  }
+
+  function markFieldError(inputEl, errorElId, message) {
+    inputEl.setAttribute('aria-invalid', 'true');
+    const errSpan = document.querySelector(`#${errorElId}`);
+    if (errSpan) errSpan.textContent = message;
+  }
+
+  // Handle Form Submission dengan Validasi Bisnis
   formDonasi.addEventListener('submit', (e) => {
     e.preventDefault();
+    resetFormErrors();
 
-    if (!isLoggedIn) {
-      openLoginModal();
+    const errors = [];
+
+    // Validasi 1: Nama
+    if (!inputNama.value.trim()) {
+      const msg = 'Nama lengkap wajib diisi.';
+      markFieldError(inputNama, 'error-nama', msg);
+      errors.push({ el: inputNama, msg });
+    }
+
+    // Validasi 2: Email
+    if (inputEmail) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(inputEmail.value.trim())) {
+        const msg = 'Alamat email tidak valid.';
+        markFieldError(inputEmail, 'error-email', msg);
+        errors.push({ el: inputEmail, msg });
+      }
+    }
+
+    // Validasi 3: Kategori
+    if (!selectKategori.value) {
+      const msg = 'Pilih salah satu kategori barang.';
+      markFieldError(selectKategori, 'error-kategori', msg);
+      errors.push({ el: selectKategori, msg });
+    }
+
+    // Validasi 4: Jumlah Unit (10 - 500)
+    if (inputJumlah) {
+      const jml = Number(inputJumlah.value);
+      if (!inputJumlah.value || isNaN(jml) || jml < 10 || jml > 500) {
+        const msg = 'Jumlah barang harus berupa angka (10 - 500 unit).';
+        markFieldError(inputJumlah, 'error-jumlah', msg);
+        errors.push({ el: inputJumlah, msg });
+      }
+    }
+
+    // Validasi 5: Posko Tujuan
+    if (!selectPosko.value) {
+      const msg = 'Pilih posko tujuan pengiriman.';
+      markFieldError(selectPosko, 'error-posko', msg);
+      errors.push({ el: selectPosko, msg });
+    }
+
+    // Validasi 6: Tanggal Pengiriman (Tidak Boleh Masa Lalu)
+    if (inputTanggal) {
+      const selectedDate = new Date(inputTanggal.value);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (!inputTanggal.value || selectedDate < today) {
+        const msg = 'Tanggal pengiriman tidak boleh berada di masa lalu.';
+        markFieldError(inputTanggal, 'error-tanggal', msg);
+        errors.push({ el: inputTanggal, msg });
+      }
+    }
+
+    // Validasi 7: Detail Barang (Min 10 Karakter)
+    if (textareaDetail.value.trim().length < 10) {
+      const msg = 'Detail barang minimal 10 karakter.';
+      markFieldError(textareaDetail, 'error-detail', msg);
+      errors.push({ el: textareaDetail, msg });
+    }
+
+    // Validasi 8: Checkbox Kelayakan
+    if (checkKelayakan && !checkKelayakan.checked) {
+      const msg = 'Anda harus menyetujui pernyataan kelayakan barang.';
+      markFieldError(checkKelayakan, 'error-kelayakan', msg);
+      errors.push({ el: checkKelayakan, msg });
+    }
+
+    // Tampilkan Error Summary atau Submit
+    if (errors.length > 0) {
+      errors.forEach(err => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${err.el.id}`;
+        a.textContent = err.msg;
+        a.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          err.el.focus();
+        });
+        li.appendChild(a);
+        errorList.appendChild(li);
+      });
+
+      errorSummary.style.display = 'block';
+      errorSummary.focus();
+      errors[0].el.focus(); // Auto-focus ke bidang error pertama
     } else {
-      alert(`Terima kasih ${inputNama.value}! Pengajuan donasi Anda berhasil dikirim.`);
-      localStorage.removeItem(STORAGE_KEY_DRAFT);
-      formDonasi.reset();
-      statusDraftEl.textContent = 'Form berhasil dikirim. Draft dibersihkan!';
+      if (!isLoggedIn) {
+        openLoginModal();
+      } else {
+        alert(`Terima kasih ${inputNama.value}! Pengajuan donasi Anda berhasil dikirim.`);
+        localStorage.removeItem(STORAGE_KEY_DRAFT);
+        formDonasi.reset();
+        statusDraftEl.textContent = 'Form berhasil dikirim. Draft dibersihkan!';
+      }
     }
   });
 
-  // Inisialisasi
+  // Inisialisasi awal
   updateActiveTabUI();
   applyFilterAndSearch();
   restoreFormDraft();
