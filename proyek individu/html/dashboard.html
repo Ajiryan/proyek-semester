@@ -105,26 +105,40 @@
             </div>
         </section>
 
-        <!-- FITUR INTERAKTIF 3: Form Donasi & Autosave Draft ke Web Storage -->
+        <!-- FITUR INTERAKTIF 3: Form Donasi dengan Validasi & Aksesibilitas (WAI-ARIA) -->
         <section id="form-donasi" aria-labelledby="heading-donasi">
             <h2 id="heading-donasi">Form Pengajuan Donasi Barang</h2>
             <p id="draft-status"></p>
-            <form id="donasi-form" action="/submit-donasi" method="POST">
+
+            <!-- Error Summary Box (Aksesibilitas) -->
+            <div id="errorSummary" role="alert" aria-live="polite" class="error-summary-box" style="display: none;" tabindex="-1">
+                <h3>Terdapat kesalahan pada pengisian formulir:</h3>
+                <ul id="errorList"></ul>
+            </div>
+
+            <form id="donasi-form" action="/submit-donasi" method="POST" novalidate>
                 <!-- Langkah 1 -->
                 <fieldset>
                     <legend>Langkah 1: Data Diri &amp; Kategori Barang</legend>
                     <div>
-                        <label for="nama-donatur">Nama Lengkap:</label>
+                        <label for="nama-donatur">Nama Lengkap <span class="required-asterisk">*</span></label>
                         <input type="text" id="nama-donatur" name="nama" required placeholder="Nama lengkap Anda">
+                        <span class="field-error" id="error-nama" aria-live="polite"></span>
                     </div>
                     <div>
-                        <label for="kategori-barang">Kategori Barang:</label>
+                        <label for="email-donatur">Alamat Email <span class="required-asterisk">*</span></label>
+                        <input type="email" id="email-donatur" name="email" required placeholder="contoh@email.com">
+                        <span class="field-error" id="error-email" aria-live="polite"></span>
+                    </div>
+                    <div>
+                        <label for="kategori-barang">Kategori Barang <span class="required-asterisk">*</span></label>
                         <select id="kategori-barang" name="kategori" required>
                             <option value="">-- Pilih Kategori --</option>
                             <option value="pakaian">Pakaian / Tekstil</option>
                             <option value="logistik">Sembako / Makanan</option>
                             <option value="obat">Obat-obatan / Medis</option>
                         </select>
+                        <span class="field-error" id="error-kategori" aria-live="polite"></span>
                     </div>
                 </fieldset>
 
@@ -132,17 +146,39 @@
                 <fieldset>
                     <legend>Langkah 2: Detail Barang &amp; Posko Tujuan</legend>
                     <div>
-                        <label for="posko-tujuan">Pilih Posko Tujuan:</label>
+                        <label for="jumlah-unit">Jumlah Unit Barang (10-500) <span class="required-asterisk">*</span></label>
+                        <input type="number" id="jumlah-unit" name="jumlah" min="10" max="500" required placeholder="Min 10, Max 500">
+                        <span class="field-error" id="error-jumlah" aria-live="polite"></span>
+                    </div>
+                    <div>
+                        <label for="posko-tujuan">Pilih Posko Tujuan <span class="required-asterisk">*</span></label>
                         <select id="posko-tujuan" name="posko" required>
                             <option value="">-- Pilih Posko --</option>
                             <option value="posko-1">Posko Utama Wilayah A</option>
                             <option value="posko-2">Posko Darurat Wilayah B</option>
                         </select>
+                        <span class="field-error" id="error-posko" aria-live="polite"></span>
                     </div>
                     <div>
-                        <label for="detail-barang">Detail Barang &amp; Jumlah:</label>
-                        <textarea id="detail-barang" name="detail" rows="4" placeholder="Jelaskan kondisi dan jumlah barang..." required></textarea>
+                        <label for="tanggal-pengiriman">Estimasi Tanggal Pengiriman <span class="required-asterisk">*</span></label>
+                        <input type="date" id="tanggal-pengiriman" name="tanggal" required>
+                        <span class="field-error" id="error-tanggal" aria-live="polite"></span>
                     </div>
+                    <div style="grid-column: 1 / -1;">
+                        <label for="detail-barang">Detail Barang &amp; Jumlah <span class="required-asterisk">*</span></label>
+                        <textarea id="detail-barang" name="detail" rows="4" placeholder="Jelaskan kondisi dan spesifikasi barang (min. 10 karakter)..." required></textarea>
+                        <span class="field-error" id="error-detail" aria-live="polite"></span>
+                    </div>
+                </fieldset>
+
+                <!-- Langkah 3: Konfirmasi Kelayakan -->
+                <fieldset>
+                    <legend>Langkah 3: Konfirmasi</legend>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="check-kelayakan" name="kelayakan" required>
+                        <label for="check-kelayakan">Saya menyatakan barang ini dalam kondisi layak pakai / baik.</label>
+                    </div>
+                    <span class="field-error" id="error-kelayakan" aria-live="polite"></span>
                 </fieldset>
 
                 <button type="submit">Kirim Pengajuan Donasi</button>
