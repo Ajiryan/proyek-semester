@@ -3,7 +3,7 @@ import {
   filterDonasiByKategori, 
   hitungTotalUnit, 
   cariDonasiById 
-} from './donasiService.js';
+} from './Donasiservice.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("=== SISTEM PLATFORM DONASI BENCANA: SCRIPT DOM LOADED ===");
@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnOpenLogin = document.querySelector('#btn-open-login');
   const btnOpenDonasi = document.querySelector('#btn-open-donasi');
   const loginFormModal = document.querySelector('#login-form-modal');
+
+  // Element API Output Selectors
+  const apiOutput = document.querySelector('#api-output');
+  const apiMessage = document.querySelector('#api-message');
+  const btnRetryApi = document.querySelector('#btn-retry-api');
 
   // ==========================================
   // LOGIKA MODAL LOGIN MENGAMBANG
@@ -388,8 +393,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+// Konfigurasi Endpoint (Menggunakan JSONPlaceholder / API Publik Posko)
+  const USE_LOCAL_DATA = false;
+  const endpointAPI = USE_LOCAL_DATA
+    ? './data/users.json' 
+    : 'https://jsonplaceholder.typicode.com/users';
+
+  async function loadApiData() {
+    if (!apiOutput || !apiMessage) return;
+    
+    // 1. Loading State
+    apiMessage.textContent = 'Memuat data dari server...';
+    apiOutput.replaceChildren();
+
+    try {
+      // 2. Fetch Request
+      const response = await fetch(endpointAPI);
+
+      // 3. Cek response.ok & Status Code
+      if (!response.ok) {
+        throw new Error(`HTTP Error Status: ${response.status}`);
+      }
+
+      // 4. Parsing JSON
+      const resultData = await response.json();
+
+      // 5. Cek Empty State
+      if (!resultData || resultData.length === 0) {
+        apiMessage.textContent = 'Data kosong (Empty State): Tidak ada data posko ditemukan.';
+        return;
+      }
+
+      // 6. Success State & Safe DOM Rendering (menggunakan textContent)
+      apiOutput.replaceChildren();
+      resultData.slice(0, 4).forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'card';
+        li.style.padding = '0.75rem 1rem';
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.alignItems = 'center';
+
+        const textInfo = document.createElement('span');
+        textInfo.textContent = `👤 Relawan/Posko: ${item.name} (${item.email})`;
+        
+        const badge = document.createElement('span');
+        badge.className = 'badge badge-kategori';
+        badge.textContent = 'AKTIF';
+
+        li.append(textInfo, badge);
+        apiOutput.append(li);
+      });
+
+      apiMessage.textContent = `Berhasil memuat ${resultData.length} data posko/relawan.`;
+
+    } catch (error) {
+      // 7. Error State Handling
+      console.error('Gagal mengambil data API:', error);
+      apiMessage.textContent = 'Data belum dapat dimuat karena kendala jaringan. Silakan coba kembali.';
+      
+      const errorLi = document.createElement('li');
+      errorLi.className = 'card';
+      errorLi.style.color = 'var(--color-danger)';
+      errorLi.style.backgroundColor = 'var(--color-danger-light)';
+      errorLi.textContent = `Gagal terhubung ke server endpoint. Detail: ${error.message}`;
+      apiOutput.append(errorLi);
+    }
+  }
+
+  // Event Listener untuk Tombol Retry
+  if (btnRetryApi) {
+  btnRetryApi.addEventListener('click', () => {
+      loadApiData();
+    });
+  }
+
   // Inisialisasi awal
   updateActiveTabUI();
   applyFilterAndSearch();
   restoreFormDraft();
+  loadApiData();
 });

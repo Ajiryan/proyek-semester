@@ -37,6 +37,23 @@
             </article>
         </section>
 
+        <!-- SECTION TAMBAHAN: Integrasi REST API (Tugas OBE) -->
+        <section id="api-integration-section" aria-labelledby="heading-api-data">
+            <h2 id="heading-api-data">Data Posko & Relawan (Live REST API)</h2>
+            <p>Informasi status dan data penugasan relawan yang diambil secara langsung melalui Web API.</p>
+            
+            <!-- Kontrol API: Tombol Retry & Indikator Pesan -->
+            <div class="api-controls" style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;">
+                <button type="button" id="btn-retry-api" class="btn-secondary btn-sm">Coba Muat Ulang (Retry)</button>
+                <span id="api-message" aria-live="polite" style="font-weight: 600; font-size: 0.875rem;"></span>
+            </div>
+
+            <!-- Kontainer Render Data API dengan State Aman -->
+            <ul id="api-output" style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                <!-- Data API akan dirender secara dinamis lewat JavaScript -->
+            </ul>
+        </section>
+        
         <!-- FITUR INTERAKTIF 1 & 2: Status Filter Tabs, Dynamic Render, & Live Search -->
         <section id="daftar-donasi-section" aria-labelledby="heading-daftar-donasi">
             <h2 id="heading-daftar-donasi">Daftar Donasi Terkumpul</h2>
